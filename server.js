@@ -1,22 +1,19 @@
-const dotenv = require('dotenv').config({silent: true});
-const client = require('twilio')(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+#!/usr/bin/env node
+'use strict';
 
-console.log(process.env.TWILIO_PHONE_NUMBER);
+require('dotenv').config({silent: true});
 
-client.messages
-  .create({
-     body: 'This is the ship that made the Kessel Run in fourteen parsecs?',
-     from: process.env.TWILIO_PHONE_NUMBER,
-     to: '+16468533493'
-   })
-  .then(message => {
-    if (message.errorCode) {
-      // error!
-      console.log("ERROR " + message.errorCode + ": " + error.errorMessage);
-    }
-    else {
-      // success!
-      console.log("SUCCESS STATUS: " + message.status)
-    }
-    console.log(JSON.stringify(message, null, 2))
-  });
+var server = require('./app');
+var port = process.env.PORT || 3000;
+
+var startServer = server.listen(port, function() {
+  console.log('Server running on port: %d', port);
+});
+
+function close() {
+  startServer.close();
+}
+
+module.exports = {
+  close: close
+};
