@@ -11,8 +11,8 @@ const recipients = [
     // make the messages a bit more personalized to each recipient for better effect
     // follow this format:
 
-    // {name:"Foo Barstein", phone:"+12128881212", message:`This is the ${BABY_NAME} Babybot.  I can answer any questions you might have on behalf of the tired parents of this beautiful new baby ${process.env.BABY_BOYGIRL}.`},
-    // {name:"Bar Foostein", phone:"‭‭‭+19148826758", message:`This is the ${BABY_NAME} Babybot.  I can answer any questions you might have on behalf of the tired parents of this beautiful new baby ${process.env.BABY_BOYGIRL}.`},
+    // {name:"Foo Barstein", phone:"+12128881212", message:`This is the ${process.env.BABY_NAME} Babybot.  I can answer any questions you might have on behalf of the tired parents of this beautiful new baby ${process.env.BABY_BOYGIRL}.`},
+    // {name:"Bar Foostein", phone:"‭‭‭+19148826758", message:`This is the ${process.env.BABY_NAME} Babybot.  I can answer any questions you might have on behalf of the tired parents of this beautiful new baby ${process.env.BABY_BOYGIRL}.`},
 ];
 
 router.post('/sms', (req, res) => {
