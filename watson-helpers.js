@@ -24,7 +24,7 @@ function getAssistant() {
  * @param {AssistantV2} assistant An existing watson assistant object
  */
 async function createSession(userId) {
-  console.log('creating session id');
+  //console.log('creating session id');
 
   // get assistant object
   const app = require('./app');
@@ -39,8 +39,8 @@ async function createSession(userId) {
     let sessionId = res.result.session_id;
     let session = new WatsonSession(userId, sessionId);
     app.sessions[userId] = session;
-    console.log('-- watson assistant session created --');
-    console.log(session);
+    //console.log('-- watson assistant session created --');
+    //console.log(session);
     return session;
   })
   .catch(err => {
@@ -91,12 +91,15 @@ async function getResponse(message, assistant, userId) {
     await createSession(userId);
   }
   else {
-    console.log('-- session still valild --');
-    console.log(Math.floor(Date.now() / 1000) - session.expiration);
+    //console.log('-- session still valild --');
+    //console.log(Math.floor(Date.now() / 1000) - session.expiration);
   }
   // assuming the session is valid or has been renewed...
   session = app.sessions[userId]; // use the new session
   sessionId = session.sessionId;
+
+  // clean up message .. watson can't handle line breaks or tabs
+  message = message.replace(/(\r\n|\n|\r|\t)/gm, "")
 
   // prepare data to send to Watson
       let payload = {
@@ -124,21 +127,23 @@ async function getResponse(message, assistant, userId) {
 
             // get the response text in the body
             let responseMessage = responseBody.generic[0].text || ''; 
+            let intent = (responseBody.intents.length) ? responseBody.intents[0].intent : '';
 
             // debugging
-            console.log("-- watson-helper.js message --");
+            //console.log("-- watson-helper.js message --");
             //console.log(JSON.stringify(res, null, 2));
             //console.log(responseBody.generic[0].text);
+
 
             // remove any undefined response messages
             responseMessage = (responseMessage) ? responseMessage : ''; 
     
             // add any indicator of confusion, if confidence is low
-            let prefixes = ['Hmm... ', 'Well... ', 'Yes... ', 'Ok... ', 'Alright... '];
-            let dumbPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-            if (responseBody.intents.length == 0 || (responseBody.intents && responseBody.intents[0].confidence <= 0.5)) {
-                responseMessage = dumbPrefix + responseMessage;
-            } // end if intent
+            // let prefixes = ['Hmm... ', 'Well... ', 'Yes... ', 'Ok... ', 'Alright... '];
+            // let dumbPrefix = prefixes[Math.floor(Math.random() * prefixes.length)];
+            // if (responseBody.intents.length == 0 || (responseBody.intents && responseBody.intents[0].confidence <= 0.5)) {
+            //     responseMessage = dumbPrefix + responseMessage;
+            // } // end if intent
     
             // do we need to get a grade from Google Sheets?
             if (responseBody.intents.length > 0 && (responseBody.intents && responseBody.intents[0].intent == 'get_grade')) {
@@ -152,8 +157,11 @@ async function getResponse(message, assistant, userId) {
             session.updateExpiration();
 
             // return response
-            response = responseMessage;
-            resolve(responseMessage);
+            responseObj = {
+              response: responseMessage,
+              intent: intent
+            };
+            resolve(responseObj);
           })
           .catch(err => {
               console.error(err);

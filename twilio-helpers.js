@@ -13,16 +13,16 @@ async function respondToMessage(from, message) {
       await createSession(from);
     }
     else {
-      console.log('found existing session id ' + app.sessions[from]);
+      //console.log('found existing session id ' + app.sessions[from]);
     }
 
     return new Promise((resolve, reject) => {
         // get Watson's response to this
-        getResponse(message, app.assistant, from).then(response => {
+        getResponse(message, app.assistant, from).then(responseObj => {
             //promise success
-            console.log("-- twilio-helper.js respondToMessage --");
-            console.log(response);
-            resolve(response);
+            //console.log("-- twilio-helper.js respondToMessage --");
+            console.log(`Outgoing message to ${from}: (intent: ${responseObj.intent}) ${responseObj.response}`);
+            resolve(responseObj);
         }, error => {
             //promise rejection
             console.log(' -- INVALID WATSON RESPONSE -- ')
