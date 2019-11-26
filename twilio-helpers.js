@@ -21,7 +21,7 @@ async function respondToMessage(from, message) {
         getResponse(message, app.assistant, from).then(responseObj => {
             //promise success
             //console.log("-- twilio-helper.js respondToMessage --");
-            console.log(`Outgoing message to ${from}: (intent: ${responseObj.intent}) ${responseObj.response}`);
+            console.log(`Outgoing message to ${from}: (${responseObj.intent}) ${responseObj.response}`);
             resolve(responseObj);
         }, error => {
             //promise rejection

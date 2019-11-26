@@ -27,7 +27,6 @@ router.post('/sms', (req, res) => {
         // throws an error, you could also catch it here
         if (err) throw err;
     });
-
     
     // get response from watson
     respondToMessage(from, body).then((responseObj) =>{
@@ -35,7 +34,7 @@ router.post('/sms', (req, res) => {
         const intent = responseObj.intent;
 
         // add a random pause between 1 and 5 seconds
-        const pause = Math.random() * 5000 + 1000;
+        const pause = Math.random() * 3000 + 500;
         setTimeout(() => {
 
             // set up basic response

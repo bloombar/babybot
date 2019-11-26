@@ -105,10 +105,22 @@ async function getResponse(message, assistant, userId) {
       let payload = {
         assistantId: process.env.ASSISTANT_ID,
         sessionId: sessionId,
-        context: {},
         input: {
             'message_type': 'text',
             "text": message
+        },
+        context: {
+          skills: {
+            'main skill': {
+              'user_defined': {
+                'babyName' : process.env.BABY_NAME,
+                'motherName' : process.env.BABY_MOTHER_NAME,
+                'fatherName' : process.env.BABY_FATHER_NAME,
+                'siblingNames' : process.env.BABY_SIBLING_NAMES
+              }
+         }
+
+          }
         }
       };
   
@@ -130,8 +142,8 @@ async function getResponse(message, assistant, userId) {
             let intent = (responseBody.intents.length) ? responseBody.intents[0].intent : '';
 
             // debugging
-            //console.log("-- watson-helper.js message --");
-            //console.log(JSON.stringify(res, null, 2));
+            //console.log("-- watson-helper.js response --");
+            //rte aconsole.log(JSON.stringify(res, null, 2));
             //console.log(responseBody.generic[0].text);
 
 
