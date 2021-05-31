@@ -24,12 +24,12 @@ Basic Node.js/Express web app setup
 Set up Twilio:
 
 1. Create an account with Twilio and add a phone number that can send and receive SMS and MMS messages.
-1. Set up your Twilio phone number to post a webhook to the URL, `https://your-ngrok-url.io/api/twilio/sms` with each incoming SMS, where `your-ngrok-url.io` is replaced with the URL displayed by ngrok.
+1. Set up your Twilio phone number to post a webhook with each incoming SMS to the URL, `https://your-ngrok-url.io/api/twilio/sms`, where `your-ngrok-url.io` is replaced with the URL displayed by ngrok.
 
 Set up IBM Watson Assistant:
 
 1. Create an account with [IBM Cloud](https://cloud.ibm.com), and add a Watson Assistant resource service.
-1. Launch Watson Assistant and create an Assistant instance. Create a Dialog for the assistant, and set up Intents, Entities, and Dialogs - see [this tutorial](https://www.ibm.com/cloud/architecture/tutorials/watson_conversation_support/) or others for examples on how to set up a basic Assistant dialog.
+1. Launch Watson Assistant and create an Assistant instance. Create a Dialog for the assistant, and set up Intents, Entities, and Dialogs - see [this tutorial](https://www.ibm.com/cloud/architecture/tutorials/watson_conversation_support/) or others for examples on how to set up a basic Assistant dialog. The more Intents, Entities, and Dialog options you give the bot, the more interesting the conversations will be.
 1. If you create an intent named `photo`, the bot will attach a photo of the baby to any message that Watson identifies as matching this intent.
 
 Complete app setup:
