@@ -40,7 +40,7 @@ Complete app setup:
 
 Send the announcements to your contacts:
 
-1. Once your bot is capable of holding a minimally-acceptable conversation about the baby, make the birth announcement to the world by running, `https://your-ngrok-url.io/api/twilio/kickoff`, where `your-ngrok-url.io` is replaced with the URL displayed by ngrok.
+1. Once your bot is capable of holding a minimally-acceptable conversation about the baby, make the birth announcement to the world by running, `https://your-ngrok-url.io/api/twilio/kickoff`, where `your-ngrok-url.io` is replaced with the URL displayed by ngrok. This will shoot out the initial announcement message to the contacts in the `recipients` variable.
 1. Watch the entertaining conversations unfold between your contacts and your bot in the log files that will appear within the `logs` directory.
 
 Let us know how it goes!
