@@ -30,6 +30,7 @@ Set up IBM Watson Assistant:
 
 1. Create an account with [IBM Cloud](https://cloud.ibm.com), and add a Watson Assistant resource service.
 1. Launch Watson Assistant and create an Assistant instance. Create a Dialog for the assistant, and set up Intents, Entities, and Dialogs - see [this tutorial](https://www.ibm.com/cloud/architecture/tutorials/watson_conversation_support/) or others for examples on how to set up a basic Assistant dialog.
+1. If you create an intent named `photo`, the bot will attach a photo of the baby to any message that Watson identifies as matching this intent.
 
 Complete app setup:
 
