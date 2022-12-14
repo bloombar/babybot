@@ -20,7 +20,7 @@
   "homepage": "https://github.com/bloombar/babybot#readme",
   "dependencies": {
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "ibm-watson": "^5.1.0",
     "twilio": "^3.37.1",
     "watson-developer-cloud": "^4.0.1"
